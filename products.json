@@ -1,0 +1,56 @@
+{
+  "items": [
+    {
+      "sys": { "id": "1" },
+      "fields": {
+        "name": "Trufa de coco",
+        "price": 1.23,
+        "image": {
+          "fields": {
+            "file": { "url": "./media/images/product-images/Trufa_coco.png" }
+          }
+        }
+      }
+    },
+    {
+      "sys": { "id": "2" },
+      "fields": {
+        "name": "Trufa de avelã",
+        "price": 1.23,
+        "image": {
+          "fields": {
+            "file": { "url": "./media/images/product-images/Trufa_avelã.png" }
+          }
+        }
+      }
+    },
+    {
+      "sys": { "id": "3" },
+      "fields": {
+        "name": "Trufa tradicional",
+        "price": 1.23,
+        "image": {
+          "fields": {
+            "file": {
+              "url": "./media/images/product-images/Trufa_tradicional.png"
+            }
+          }
+        }
+      }
+    },
+    {
+      "sys": { "id": "4" },
+      "fields": {
+        "name": "Trufa artesanal com chocolate",
+        "price": 1.23,
+        "image": {
+          "fields": {
+            "file": {
+              "url": "./media/images/product-images/Trufa_artesanal_chocolate.png"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
