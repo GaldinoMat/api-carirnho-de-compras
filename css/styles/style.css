@@ -49,6 +49,7 @@ img {
 
 .shopping-cart-icon {
   position: relative;
+  cursor: pointer;
 }
 
 .amount {
@@ -165,8 +166,14 @@ img {
   border-radius: 0.625rem;
   padding: 1.25rem 0;
   position: fixed;
-  top: 50%;
+  top: 100%;
   left: 50%;
+  transform: translateX(-50%);
+  transition: 0.2s;
+}
+
+.shopping-cart-show {
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 
