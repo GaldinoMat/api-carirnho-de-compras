@@ -1,3 +1,5 @@
+### Build em deploy na Vercel: https://api-carrinho-de-compras.vercel.app/
+
 ### Carrinho de compras
 
 Simples api de carrinho de compras, utilizando um documento json como database para alimentar o site dinamicamente.
