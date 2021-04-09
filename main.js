@@ -7,6 +7,10 @@ const totalItemsAmount = document.querySelector(".amount");
 
 const totalPrice = document.querySelector("[data-total]");
 
+const freeShippingDisclaimer = document.querySelector(".free-shipping");
+
+const shoppingCartHr = document.querySelector(".invisible-separator");
+
 let shoppingCart = [];
 
 let buttonsDom = [];
@@ -26,6 +30,8 @@ class Products {
       products = products.map((item) => {
         const { id, name, price, discountPrice } = item;
         const image = item.imageUrl;
+
+        console.log(id, name, price, discountPrice);
 
         return { id, name, price, discountPrice, image };
       });
@@ -53,12 +59,8 @@ class UI {
             <div class="product-showcase-text">
               <h3 class="product-showcase-name">${product.name}</h3>
               <div class="prices">
-                <p class="showcase-full-price">De R$ ${
-                  product.listPrice / 100
-                }</p>
-                <p class="showcase-discount-price">Por R$ ${
-                  product.sellingPrice / 100
-                }</p>
+                <p class="showcase-full-price">De R$ ${product.price}</p>
+                <p class="showcase-discount-price">Por R$ ${product.discountPrice}</p>
               </div>
               </div>
               <div class="add-to-cart">
@@ -75,20 +77,21 @@ class UI {
 
   // Gets and attribute functionality to products' buttons
   getProductsButtons() {
-    let buttons = [...document.querySelectorAll(".add-button")];
-    buttonsDom = buttons;
-    buttons.forEach((button) => {
-      let id = button.dataset.id;
-      let inCart = shoppingCart.find((item) => item.id === id);
+    let productButtons = [...document.querySelectorAll(".add-button")];
+    buttonsDom = productButtons;
 
-      if (inCart) {
-        button.innerText = "In Cart";
+    productButtons.forEach((button) => {
+      let id = button.dataset.id;
+      let itemInCart = shoppingCart.find((item) => item.id === id);
+
+      if (itemInCart) {
+        button.innerText = "No carrinho!";
         button.disabled = true;
       }
 
       button.addEventListener("click", (event) => {
         // disable button
-        event.currentTarget.innerText = "In Cart";
+        event.currentTarget.innerText = "No carrinho!";
         event.currentTarget.disabled = true;
         // add to cart
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
@@ -108,16 +111,26 @@ class UI {
 
     shoppingCartTotal.map((item) => {
       tempCartTotal >= 10.0
-        ? (tempCartTotal += (item.price / 100) * item.amount)
-        : (tempCartTotal += (item.discountPrice / 100) * item.amount);
+        ? (tempCartTotal += item.price * item.amount)
+        : (tempCartTotal += item.discountPrice * item.amount);
 
       if (tempCartTotal >= 10.0) {
-        tempCartTotal -= item.price / 100;
-        tempCartTotal += item.discountPrice / 100;
+        tempCartTotal -= item.price;
+        tempCartTotal += item.discountPrice;
       }
       itemsTotal += item.amount;
     });
+
     totalPrice.innerText = parseFloat(tempCartTotal.toFixed(2));
+
+    totalPrice.innerText != 0.
+      ? shoppingCartHr.classList.remove("invisible-separator")
+      : shoppingCartHr.classList.add("invisible-separator");
+
+    totalPrice.innerText >= 10.0
+      ? freeShippingDisclaimer.classList.remove("invisible")
+      : freeShippingDisclaimer.classList.add("invisible");
+
     totalItemsAmount.innerText = itemsTotal;
   }
 
@@ -137,19 +150,15 @@ class UI {
         </div>
         <div class="product-text">
           <h2 class="product-name">${item.name}</h2>
-          <p class="whole-price">R$ ${item.price / 100}</p>
-          <p class="discount-price">R$ ${item.discountPrice / 100}</p>
+          <p class="whole-price">R$ ${item.price}</p>
+          <p class="discount-price">R$ ${item.discountPrice}</p>
         </div>
       </div>
       <div class="item-amounts">
               <div class="change-amount">
-                <i class="fas fa-arrow-up increase-amount" data-id=${
-                  item.id
-                }></i>
+                <i class="fas fa-arrow-up increase-amount" data-id=${item.id}></i>
                 <span class="item-cart-amount">${item.amount}</span>
-                <i class="fas fa-arrow-down decrease-amount" data-id=${
-                  item.id
-                }></i>
+                <i class="fas fa-arrow-down decrease-amount" data-id=${item.id}></i>
               </div>
       </div>
     `;
