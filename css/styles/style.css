@@ -72,7 +72,7 @@ img {
 
 .hero-bg {
   width: 100%;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 500px);
   /* background: url(../../media/images/hero/pexels-karolina-grabowska-4198415.jpg)
     center/cover no-repeat; */
   color: white;

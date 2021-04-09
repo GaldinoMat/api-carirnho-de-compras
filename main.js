@@ -24,10 +24,10 @@ class Products {
       let products = data.items;
 
       products = products.map((item) => {
-        const { id, name, listPrice, sellingPrice } = item;
+        const { id, name, price, discountPrice } = item;
         const image = item.imageUrl;
 
-        return { id, name, listPrice, sellingPrice, image };
+        return { id, name, price, discountPrice, image };
       });
       return products;
     } catch (error) {
@@ -108,12 +108,12 @@ class UI {
 
     shoppingCartTotal.map((item) => {
       tempCartTotal >= 10.0
-        ? (tempCartTotal += (item.sellingPrice / 100) * item.amount)
-        : (tempCartTotal += (item.listPrice / 100) * item.amount);
+        ? (tempCartTotal += (item.price / 100) * item.amount)
+        : (tempCartTotal += (item.discountPrice / 100) * item.amount);
 
       if (tempCartTotal >= 10.0) {
-        tempCartTotal -= item.listPrice / 100;
-        tempCartTotal += item.sellingPrice / 100;
+        tempCartTotal -= item.price / 100;
+        tempCartTotal += item.discountPrice / 100;
       }
       itemsTotal += item.amount;
     });
@@ -137,8 +137,8 @@ class UI {
         </div>
         <div class="product-text">
           <h2 class="product-name">${item.name}</h2>
-          <p class="whole-price">R$ ${item.listPrice / 100}</p>
-          <p class="discount-price">R$ ${item.sellingPrice / 100}</p>
+          <p class="whole-price">R$ ${item.price / 100}</p>
+          <p class="discount-price">R$ ${item.discountPrice / 100}</p>
         </div>
       </div>
       <div class="item-amounts">
