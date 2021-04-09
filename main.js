@@ -31,8 +31,6 @@ class Products {
         const { id, name, price, discountPrice } = item;
         const image = item.imageUrl;
 
-        console.log(id, name, price, discountPrice);
-
         return { id, name, price, discountPrice, image };
       });
       return products;
